@@ -65,7 +65,6 @@
 				hunks = [], // the final output will be added here
 				lineNumber = 0,
 				line, // the text of current line
-				prevLine, // the text of the previous processed line - only needed for lonely newline changes
 				match, // used for regexs
 				hunk,
 				prevMod, // '+' or '-' - used for EOF newline handling
@@ -96,7 +95,6 @@
 				switch(line.charAt(0)) {
 					case ' ':
 						// skip contextual lines
-						prevLine = line.substring(1);
 						break;
 					case '@':
 						match = reHunkStart.exec(line);
@@ -145,14 +143,7 @@
 						hunks.push(hunk);
 						break;
 					case '\\':
-						// a lonely '\ No newline at end of file' line ==> need to add a hunk
-						hunks.push({
-							type: 'change',
-							firstLine: lineNumber-1,
-							lastLine: lineNumber-1,
-							'-': [ prevLine ],
-							'+': [ prevLine.replace(/\n$/, "") ]
-						});
+						// a lonely '\ No newline at end of file' line: do nothing
 						break;
 
 					default:

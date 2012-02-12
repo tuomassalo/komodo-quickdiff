@@ -6,11 +6,16 @@ A Komodo Edit/IDE extensions that adds inline diff indicators, placed in left ma
 Features
 --------
 
-* hunk level reverting (click on the margin markers)
+* hunk (change) level reverting by clicking on the margin markers
 * support for git, Subversion and plain files
 * local and remote files (sftp)
 
 Note: Linux/Mac only. Windows is not supported.
+
+License
+-------
+
+This extension is available under the Mozilla Public License 1.1
 
 Contributing
 ------------

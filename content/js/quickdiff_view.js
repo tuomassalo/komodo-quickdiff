@@ -72,7 +72,7 @@ if(osType !== 'Linux' && osType !== 'Darwin') {
 			self.view = view;
 			
 			// TODO: better graphics?
-			scimoz.markerSetFore(QUICKDIFF_MARKERNUMBERS.add,    0x00ff00); // green
+			scimoz.markerSetFore(QUICKDIFF_MARKERNUMBERS.add,    0x00aa00); // green
 			scimoz.markerSetFore(QUICKDIFF_MARKERNUMBERS.del,    0x0000ff); // red
 			scimoz.markerSetFore(QUICKDIFF_MARKERNUMBERS.change, 0xff0000); // blue
 			scimoz.setMarginMaskN(QUICKDIFF_MARGIN, mask);
