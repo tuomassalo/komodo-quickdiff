@@ -1,0 +1,2 @@
+content quickdiff content/quickdiff
+overlay chrome://komodo/content/komodo.xul chrome://quickdiff/content/overlay.xul

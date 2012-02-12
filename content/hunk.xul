@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE window PUBLIC "-//MOZILLA//DTD XUL V1.0//EN" "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+
+<window id="quickdiffHunkWindow"
+        windowtype="quickdiff"
+        title="quickdiff"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        width="600"
+        height="300"
+        screenX="20"
+        screenY="20"
+        xpersist="screenX screenY width height"
+		onresize="
+		if(/(\d+)/.test(window.innerHeight)) {
+			document.getElementById('quickdiffContentFrame').style.height = Math.max(RegExp.$1 - 50, 50) + 'px';
+		}"
+		onkeypress="if(event.keyCode==27) { window.top.close() }"
+        >
+      <html:iframe style="border: 0" id="quickdiffContentFrame" src="chrome://quickdiff/content/hunk.xhtml" />
+	  <hbox style="margin-left: 14px">
+		<button id="quickdiffButtonRevert" label="Revert this change"/>
+		<button label="Close" oncommand="window.top.close()"/>
+	  </hbox>
+</window>
