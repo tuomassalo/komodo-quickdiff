@@ -29,6 +29,6 @@
     </r:Seq>
   </updates>
   <version>0.1.0</version>
-	<updateLink>https://github.com/tuomassalo/komodo-quickdiff/raw/master/quickdiff-0.1.0.xpi</updateLink>
+  <updateLink>https://github.com/tuomassalo/komodo-quickdiff/raw/master/quickdiff-0.1.0.xpi</updateLink>
 </r:Description>
 </r:RDF>
