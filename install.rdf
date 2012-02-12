@@ -4,7 +4,7 @@
     <Description about="urn:mozilla:install-manifest">
         <em:id>quickdiff@naapuri.iki.fi</em:id>
         <em:name>Quick Diff</em:name>
-        <em:version>0.1.0</em:version>
+        <em:version>0.2.0</em:version>
         <em:description>Inline diff indicators with hunk level reverting; support for git, Subversion and plain files; local and remote. NB: Linux/Mac only.</em:description>
         <em:creator>Tuomas Salo</em:creator>
         <em:homepageURL>https://github.com/tuomassalo/komodo-quickdiff/</em:homepageURL>

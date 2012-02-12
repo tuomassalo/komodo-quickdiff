@@ -7,13 +7,13 @@
     <r:Seq>
       <r:li>
         <r:Description>
-          <version>0.1.0</version>
+          <version>0.2.0</version>
           <targetApplication>
             <r:Description> <!-- Komodo Edit -->
               <id>{36E66FA0-F259-11D9-850E-000D935D3368}</id>
               <minVersion>6.0</minVersion>
               <maxVersion>7.*</maxVersion>
-              <updateLink>https://github.com/tuomassalo/komodo-quickdiff/raw/master/quickdiff-0.1.0.xpi</updateLink>
+              <updateLink>https://github.com/tuomassalo/komodo-quickdiff/raw/master/quickdiff-0.2.0.xpi</updateLink>
             </r:Description>
           </targetApplication>
           <targetApplication>
@@ -21,14 +21,14 @@
               <id>{36E66FA0-F259-11D9-850E-000D935D3368}</id>
               <minVersion>6.0</minVersion>
               <maxVersion>7.*</maxVersion>
-              <updateLink>https://github.com/tuomassalo/komodo-quickdiff/raw/master/quickdiff-0.1.0.xpi</updateLink>
+              <updateLink>https://github.com/tuomassalo/komodo-quickdiff/raw/master/quickdiff-0.2.0.xpi</updateLink>
             </r:Description>
           </targetApplication>
         </r:Description>
       </r:li>
     </r:Seq>
   </updates>
-  <version>0.1.0</version>
-  <updateLink>https://github.com/tuomassalo/komodo-quickdiff/raw/master/quickdiff-0.1.0.xpi</updateLink>
+  <version>0.2.0</version>
+  <updateLink>https://github.com/tuomassalo/komodo-quickdiff/raw/master/quickdiff-0.2.0.xpi</updateLink>
 </r:Description>
 </r:RDF>

@@ -65,23 +65,27 @@
 				hunks = [], // the final output will be added here
 				lineNumber = 0,
 				line, // the text of current line
+				prevLine, // the text of the previous processed line - only needed for lonely newline changes
 				match, // used for regexs
 				hunk,
-				lastChangeType, // '+' or '-' - used for EOF newline handling
+				prevMod, // '+' or '-' - used for EOF newline handling
 				processLine = function(type, lineContents) {
 					if(type==='\\') {
 						// "\ No newline at end of file"
-						var a = hunk[lastChangeType];
-						a[a.length-1] = a[a.length-1].replace(/\n$/, "");
+						prevMod[prevMod.length-1] = prevMod[prevMod.length-1].replace(/\n$/, "");
 					} else {
 						if(type==='-') {
 							lineNumber--;
 						}
-						lastChangeType = type;
 						hunk[type].push(lineContents);
+						prevMod = hunk[type];
 					}
 				}
 			;
+			
+			
+			ko.logging.getLogger("extensions.quickdiff").warn("out" + Math.random() + ": " + JSON.stringify({output: diffText}));
+			
 			// expect to have a diff of one file, so discard any lines regarding the file name
 			
 			while(/^(?:Index:|===|---|\+\+\+)/.test(diffLines[0])) {
@@ -93,7 +97,8 @@
 				line = diffLines.shift();
 				switch(line.charAt(0)) {
 					case ' ':
-						// no-op: skip contextual lines
+						// skip contextual lines
+						prevLine = line.substring(1);
 						break;
 					case '@':
 						match = reHunkStart.exec(line);
@@ -141,8 +146,25 @@
 	
 						hunks.push(hunk);
 						break;
+					case '\\':
+						// a lonely '\ No newline at end of file' line ==> need to add a hunk
+						window.alert(JSON.stringify({ hunks: hunks }, 4,4));
+						hunks.push({
+							type: 'change',
+							firstLine: lineNumber-1,
+							lastLine: lineNumber-1,
+							'-': [ prevLine ],
+							'+': [ prevLine.replace(/\n$/, "") ]
+						});
+						
+						window.alert(JSON.stringify({ hunks: hunks }, 4,4));
+						//prevMod[prevMod.length-1] = prevMod[prevMod.length-1].replace(/\n$/, "");
+						//window.alert(JSON.stringify({ hunks: hunks }, 4,4));
+						break;
+
 					default:
-						window.alert("Error[3] reading diff, line: " + line);
+						ko.logging.getLogger("extensions.quickdiff").warn("out:" + JSON.stringify({output: diffText}));
+						window.alert("Error[3] reading diff, line: " + line + "\n\nSee the pystderr.log for details.");
 				}
 			}
 			return hunks;

@@ -273,14 +273,13 @@ if(osType !== 'Linux' && osType !== 'Darwin') {
 					foo = dlg.document.getElementById('quickdiffContentFrame').contentDocument.getElementById('quickdiffChanges').nodeName
 				;
 			} catch(err) {
-				//ko.logging.getLogger("extensions.quickdiff").warn("not yet: " + err);
 				window.setTimeout(preInitDlg, 100);
 				return;
 			}
 			try {
 				initDlg();
 			} catch(err2) {
-				//ko.logging.getLogger("extensions.quickdiff").warn("nope: " + err2);
+				ko.logging.getLogger("extensions.quickdiff").warn("dialog error: " + err2);
 			}
 		};
 		
