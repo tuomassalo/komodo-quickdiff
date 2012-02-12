@@ -3,6 +3,8 @@ komodo-quickdiff
 
 A Komodo Edit/IDE extensions that adds inline diff indicators, placed in left margin.
 
+![Example](https://venko.net/komodo-quickdiff/example.png)
+
 Features
 --------
 
@@ -15,7 +17,7 @@ Note: Linux/Mac only. Windows is not supported.
 License
 -------
 
-This extension is available under the Mozilla Public License 1.1
+This extension is available under the Mozilla Public License 1.1.
 
 Contributing
 ------------
