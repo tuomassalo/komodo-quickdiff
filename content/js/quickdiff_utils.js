@@ -84,8 +84,6 @@
 			;
 			
 			
-			ko.logging.getLogger("extensions.quickdiff").warn("out" + Math.random() + ": " + JSON.stringify({output: diffText}));
-			
 			// expect to have a diff of one file, so discard any lines regarding the file name
 			
 			while(/^(?:Index:|===|---|\+\+\+)/.test(diffLines[0])) {
@@ -148,7 +146,6 @@
 						break;
 					case '\\':
 						// a lonely '\ No newline at end of file' line ==> need to add a hunk
-						window.alert(JSON.stringify({ hunks: hunks }, 4,4));
 						hunks.push({
 							type: 'change',
 							firstLine: lineNumber-1,
@@ -156,10 +153,6 @@
 							'-': [ prevLine ],
 							'+': [ prevLine.replace(/\n$/, "") ]
 						});
-						
-						window.alert(JSON.stringify({ hunks: hunks }, 4,4));
-						//prevMod[prevMod.length-1] = prevMod[prevMod.length-1].replace(/\n$/, "");
-						//window.alert(JSON.stringify({ hunks: hunks }, 4,4));
 						break;
 
 					default:
