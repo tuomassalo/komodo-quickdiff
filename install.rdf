@@ -9,7 +9,7 @@
         <em:creator>Tuomas Salo</em:creator>
         <em:homepageURL>https://github.com/tuomassalo/komodo-quickdiff/</em:homepageURL>
         <em:type>2</em:type> <!-- type=extension -->
-				<em:updateURL>https://venko.net/komodo-quickdiff/update.rdf</em:updateURL>
+        <em:updateURL>https://venko.net/komodo-quickdiff/update.rdf</em:updateURL>
 
         <em:targetApplication>
             <Description>
