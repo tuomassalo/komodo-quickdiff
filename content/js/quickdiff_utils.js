@@ -11,8 +11,30 @@
 */
 (function(global) {
 	"use strict";
-
+	
+	// change this to print debug stuff to pystderr.log
+	var debugging = false;
+	
+	if(debugging) {
+		window.openDialog("chrome://global/content/console.xul", "ErrorConsole");
+	}
+	
 	global.QuickdiffUtils = {
+		
+		dbg: debugging ? function(msg, dump) {
+			if(dump!==undefined) {
+				try {
+					msg += " " + JSON.stringify(dump);
+				} catch(err) {
+					try {
+						msg += " " + JSON.stringify({ dump: dump });
+					} catch(err2) {
+						msg += " [cannot dump: " + err2 + "]";
+					}
+				}
+			}
+			ko.logging.getLogger("extensions.quickdiff").warn(msg);
+		} : function() {},
 		
 		/**
 		 * runs the specified `cmd` shell command asyncronously, calling callback(retval, stdout) when finished.

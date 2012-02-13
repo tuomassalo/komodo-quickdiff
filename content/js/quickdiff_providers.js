@@ -43,12 +43,18 @@ function quickdiffFactory(filename) {
 				;
 				
 				ret = process.getStdout();
+				QuickdiffUtils.dbg("_asLocal _runCommand", {
+					cmd: cmd,
+					retval: retval,
+					stdout: ret,
+					stderr: process.getStderr()
+				});
 				return ret;
 			};
 			
 			this.getBaseCmd = function() { return this._getBaseCmd(); };
 			
-			this.accept = function(filename) {
+			this.accept = function() {
 				var match = reRemoteFile.exec(filename);
 				if(match) {
 					// not a local file
@@ -89,6 +95,12 @@ function quickdiffFactory(filename) {
 					throw msg;
 				}
 				retval = conn.runCommand(cmd, false, stdout, stderr);
+				QuickdiffUtils.dbg("_asLocal _runCommand", {
+					cmd: cmd,
+					retval: retval,
+					stdout: stdout,
+					stderr: stderr
+				});
 				return stdout.value;
 			};
 			
@@ -101,7 +113,7 @@ function quickdiffFactory(filename) {
 				return "cat " + shellEsc(baseTempFilename);
 			};
 			
-			this.accept = function(filename) {
+			this.accept = function() {
 				var match = reRemoteFile.exec(filename);
 				if(match) {
 					this.remoteServer = match[1];
@@ -131,8 +143,7 @@ function quickdiffFactory(filename) {
 		asGit = function() {
 			this._acceptType = function() {
 				var
-					gitDir = os.path.join(this.dirname, ".git"),
-					found = this._runCommand('ls -d ' + shellEsc(gitDir))
+					found = this._runCommand('cd ' + shellEsc(this.dirname) + ' && git status')
 				;
 				return found ? true : false;
 			};
@@ -146,8 +157,7 @@ function quickdiffFactory(filename) {
 		asSvn = function() {
 			this._acceptType = function() {
 				var
-					svnDir = os.path.join(this.dirname, ".svn"),
-					found = this._runCommand('ls -d ' + shellEsc(svnDir))
+					found = this._runCommand('cd ' + shellEsc(this.dirname) + ' && svn info')
 				;
 				return found ? true : false;
 			};
@@ -186,12 +196,20 @@ function quickdiffFactory(filename) {
 
 	// the factory
 	for(i=0; i<providers.length; i++) {
-		provider = new providers[i]();
-		if(provider.accept(filename)) {
-			return provider;
+		QuickdiffUtils.dbg("trying provider", {'#': i, filename: filename});
+
+		try {
+			provider = new providers[i]();
+			provider.accept();
+			if(provider.accept()) {
+				QuickdiffUtils.dbg("provider chosen: " + provider.getAgainstTitle());
+				return provider;
+			}
+		} catch(err) {
+			QuickdiffUtils.dbg("provider threw an exception: " + err);
 		}
 	}
-	window.alert("Quick Diff: no diff provider found");
+	QuickdiffUtils.dbg("no diff provider found");
 	// shouldn't reach this line
 	return null;
 }	
